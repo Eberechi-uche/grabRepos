@@ -8,7 +8,7 @@
 
     <div class="body">
       <div class="layout">
-        <div v-for="(repo, index) in repositories.repos" :key="repo.id">
+        <div v-for="(repo, index) in pages" :key="repo.id">
           <router-link :to="{ name: 'RepoDetails', params: { id: repo.id } }">
             <div class="card-container">
               <div class="card-top-container">
@@ -23,6 +23,13 @@
           </router-link>
         </div>
       </div>
+      <div class="flex">
+        <div v-for="(pages, index) in Math.ceil(repositories.repos.length / 4)">
+          <button @click="paginate(index)">
+            {{ index + 1 }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -35,6 +42,7 @@ export default {
   name: "HomeView",
   data() {
     return {
+      pages: [],
       repositories,
     };
   },
@@ -43,8 +51,15 @@ export default {
       .get("https://api.github.com/users/Eberechi-uche/repos")
       .then((response) => {
         repositories.repos = response.data;
-        console.log(response.data);
+        this.pages = repositories.repos.slice(0, 4);
       });
+  },
+  computed: {},
+  methods: {
+    paginate(index) {
+      let upperBound = index * 4;
+      this.pages = this.repositories.repos.slice(upperBound, upperBound + 4);
+    },
   },
 };
 </script>
@@ -132,17 +147,33 @@ a:hover {
   object-fit: fill;
   border: 4px solid rgb(10, 105, 105);
 }
-
-@media only screen and (min-width: 600px) {
+.flex button {
+  margin: 5px;
+  border: none;
+  padding: 5px 10px;
+  color: white;
+  background-color: black;
+}
+button :hover {
+  cursor: pointer;
+}
+.body {
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr;
+}
+@media only screen and (min-width: 600px) and (max-width: 1024px) {
   .body {
     grid-template-columns: 1fr;
     place-items: center;
   }
   .layout {
+    display: grid;
+    place-items: center;
     grid-template-columns: 1fr 1fr;
   }
 }
-@media only screen and (min-width: 1020px) {
+@media only screen and (min-width: 1080px) {
   .body {
     grid-template-columns: 1fr;
     place-items: center;

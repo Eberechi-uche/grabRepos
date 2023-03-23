@@ -9,7 +9,7 @@
 <style>
 .grid {
   width: 100%;
-  height: 90vh;
+  height: 40vh;
   display: grid;
   place-items: center;
 }

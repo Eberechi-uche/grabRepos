@@ -13,7 +13,6 @@ export default {
 
       return item.id === convertProps;
     });
-    console.log(this.repo.homepage);
   },
 };
 </script>
