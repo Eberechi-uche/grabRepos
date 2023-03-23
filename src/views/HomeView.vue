@@ -4,10 +4,6 @@
     <div class="line"></div>
     <div class="left">
       <h1>Projects</h1>
-      <img
-        class="image-sm"
-        src="https://avatars.githubusercontent.com/u/95278948?v=4"
-      />
     </div>
 
     <div class="body">
@@ -78,10 +74,11 @@ a:hover {
   align-items: center;
 }
 .left h1 {
-  font-size: 5vw;
+  font-size: 10vh;
   font-weight: 900;
   font-family: "Abril Fatface", cursive;
   color: black;
+  letter-spacing: 5px;
 }
 .card-container {
   border: 1px solid black;
@@ -133,6 +130,7 @@ a:hover {
   height: 35px;
   border-radius: 50px;
   object-fit: fill;
+  border: 4px solid rgb(10, 105, 105);
 }
 
 @media only screen and (min-width: 600px) {

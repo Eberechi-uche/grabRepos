@@ -7,7 +7,12 @@
     </router-link>
 
     <router-link to="/joker/opps">to no where</router-link>
-    <p>&#169; 2023</p>
+    <a href="https://github.com/Eberechi-uche" target="_blank">
+      <img
+        class="image-sm"
+        src="https://avatars.githubusercontent.com/u/95278948?v=4"
+      />
+    </a>
   </nav>
   <div class="nav-history">
     <div class="flex">
@@ -68,6 +73,7 @@ nav a.router-link-exact-active {
   height: 10px;
   background-color: black;
   margin: 3px;
+  background-color: rgb(10, 105, 105);
 }
 .nav-history {
   padding-left: 20px;
@@ -82,8 +88,9 @@ nav a.router-link-exact-active {
 .flex p:hover {
   cursor: pointer;
   transform: scaleX(1.2);
+  transition: transform 0.4s ease-in-out;
 }
 .dot-container {
-  border: 2px solid black;
+  border: 2px solid rgb(10, 105, 105);
 }
 </style>

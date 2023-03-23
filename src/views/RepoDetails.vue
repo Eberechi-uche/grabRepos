@@ -19,20 +19,19 @@ export default {
 </script>
 
 <template>
-  <h1>{{ repo.name }}</h1>
-  <div class="flex">
-    <a :href="repo.homepage" target="_blank">
-      <p>homepage</p>
-    </a>
-    <a :href="repo.html_url" target="_blank">
-      <p>github</p>
-    </a>
+  <div class="repo-body">
+    <h1>{{ repo.name }}</h1>
+    <div class="flex">
+      <a :href="repo.homepage" target="_blank">
+        <p>homepage</p>
+      </a>
+      <a :href="repo.html_url" target="_blank">
+        <p>github</p>
+      </a>
+    </div>
+    <div class="horizontal"></div>
+    <p>{{ repo.description }}</p>
   </div>
-
-  <div class="horizontal"></div>
-  <p>{{ repo.description }}</p>
-
-  <p>{{ id }}</p>
 </template>
 
 <style>
@@ -42,5 +41,14 @@ h1 {
   font-family: "Abril Fatface", cursive;
   color: black;
   text-align: start;
+}
+.flex p {
+  margin-right: 10px;
+  padding: 10px 0;
+  color: rgb(10, 105, 105);
+  font-weight: bold;
+}
+.repo-body {
+  padding: 0 30px;
 }
 </style>
