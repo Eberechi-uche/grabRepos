@@ -1,7 +1,9 @@
 <template>
   <nav>
     <router-link to="/">
-      <div class="dot"></div>
+      <div class="dot-container">
+        <div class="dot"></div>
+      </div>
     </router-link>
 
     <router-link to="/joker/opps">to no where</router-link>
@@ -13,7 +15,9 @@
       <p class="a" @click="forward">&#8594;</p>
     </div>
   </div>
-  <router-view />
+  <div class="router-children">
+    <router-view />
+  </div>
 </template>
 <script>
 export default {
@@ -36,8 +40,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #e9e7e7;
   padding: 20px;
+  width: 100%;
+  height: max-content;
 }
 a {
   text-decoration: none;
@@ -62,6 +67,7 @@ nav a.router-link-exact-active {
   width: 10px;
   height: 10px;
   background-color: black;
+  margin: 3px;
 }
 .nav-history {
   padding-left: 20px;
@@ -70,8 +76,14 @@ nav a.router-link-exact-active {
   justify-content: flex-start;
   font-size: 30px;
 }
+.flex p {
+  margin: 0 5px 0;
+}
 .flex p:hover {
   cursor: pointer;
   transform: scaleX(1.2);
+}
+.dot-container {
+  border: 2px solid black;
 }
 </style>

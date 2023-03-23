@@ -4,30 +4,27 @@
     <div class="line"></div>
     <div class="left">
       <h1>Projects</h1>
+      <img
+        class="image-sm"
+        src="https://avatars.githubusercontent.com/u/95278948?v=4"
+      />
     </div>
 
     <div class="body">
-      <div v-for="repo in repos" :key="repo.id">
-        <div class="card-container">
-          <div class="card-image-container">
-            <img
-              src="../../src/assets/git.jpeg"
-              alt="github placeholder image"
-            />
-          </div>
-          <div class="card-text-container">
-            <h3>{{ repo.name }}</h3>
-            <p>{{ repo.description }}</p>
-            <div class="flex-wrapper">
-              <router-link
-                :to="{ name: 'RepoDetails', params: { id: repo.id } }"
-              >
-                <div class="flex">
-                  <button class="card-btn">more</button>
-                </div>
-              </router-link>
+      <div class="layout">
+        <div v-for="(repo, index) in repositories.repos" :key="repo.id">
+          <router-link :to="{ name: 'RepoDetails', params: { id: repo.id } }">
+            <div class="card-container">
+              <div class="card-top-container">
+                <p>{{ index }}</p>
+                <p>{{ repo.name }}</p>
+                <hr />
+              </div>
+              <div class="card-text-container">
+                <p>{{ repo.description }}</p>
+              </div>
             </div>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
@@ -35,34 +32,35 @@
 </template>
 
 <script>
-import Card from "@/components/Card.vue";
 import axios from "axios";
+import { repositories } from "@/components/Store.js";
 
 export default {
   name: "HomeView",
   data() {
     return {
-      repos: [],
+      repositories,
     };
   },
   mounted() {
     axios
       .get("https://api.github.com/users/Eberechi-uche/repos")
       .then((response) => {
-        this.repos = response.data;
+        repositories.repos = response.data;
         console.log(response.data);
       });
-  },
-
-  components: {
-    Card,
   },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Climate+Crisis&family=Mulish:wght@200&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+a {
+  all: unset;
+}
+a:hover {
+  cursor: pointer;
+}
 .home {
   position: relative;
 }
@@ -70,43 +68,41 @@ export default {
   padding: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  font-size: small;
 }
 .left {
-  width: 100vw;
+  width: 100%;
+  height: fit-content;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-evenly;
+  align-items: center;
 }
 .left h1 {
-  font-size: 10vw;
+  font-size: 5vw;
   font-weight: 900;
-  font-family: "Climate Crisis", cursive;
+  font-family: "Abril Fatface", cursive;
   color: black;
 }
 .card-container {
-  border: 2px solid black;
+  border: 1px solid black;
   display: grid;
-  width: 100%;
-  height: fit-content;
-  grid-template-columns: 30% auto;
+  place-items: center;
+  width: 300px;
+  height: 300px;
+  grid-template-rows: 60% auto;
   overflow: hidden;
+  margin: 10px;
+  padding: 10px;
 }
-.card-image-container {
+
+.card-top-container p {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  font-size: xx-large;
+  font-family: "Abril Fatface", cursive;
 }
-.card-image-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+
 .card-text-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2px 10px;
-  height: 100%;
+  height: fit-content;
 }
 .flex-wrapper {
   display: flex;
@@ -116,7 +112,7 @@ export default {
 .flex {
   width: fit-content;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 .card-btn {
   background-color: black;
@@ -132,22 +128,30 @@ export default {
   cursor: pointer;
   border-bottom: 2px;
 }
-
-@media only screen and (max-width: 600px) {
-  .card-container {
-    width: 100%;
-  }
+.image-sm {
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  object-fit: fill;
 }
-@media only screen and (max-width: 600px) {
+
+@media only screen and (min-width: 600px) {
   .body {
     grid-template-columns: 1fr;
+    place-items: center;
+  }
+  .layout {
+    grid-template-columns: 1fr 1fr;
   }
 }
-@media only screen and (min-width: 2000px) {
+@media only screen and (min-width: 1020px) {
   .body {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     place-items: center;
-    padding: auto;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }
 .line {
